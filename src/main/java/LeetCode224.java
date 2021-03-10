@@ -69,7 +69,7 @@ public class LeetCode224 {
     }
 
     public static void main(String[] args) {
-        String[] cases = {"2-1 + 2", "(1+(4+5+2)-3)+(6+8)", "-1+2"};
+        String[] cases = {"2-1 + 2", "(1-(-4+5+2)-3)+(6+8)", "-1+2"};
         for (String s : cases) {
             System.out.println(calculate(s));
         }
