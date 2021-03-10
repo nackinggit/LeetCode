@@ -33,8 +33,8 @@ import java.util.Stack;
  * 链接：https://leetcode-cn.com/problems/basic-calculator-ii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class BasicCalculatorII {
-    public static int calculate(String s) {
+public class LeetCode227 {
+    public static int calculateII(String s) {
         char[] cs = s.toCharArray();
         Stack<Character> signs = new Stack<>();
         Stack<Integer> nums = new Stack<>();
@@ -77,7 +77,7 @@ public class BasicCalculatorII {
     public static void main(String[] args) {
         String[] cases = {"1+2*3", "1-2/3+5-4*3"};
         for (String s : cases) {
-            System.out.println(calculate(s));
+            System.out.println(calculateII(s));
         }
     }
 }
