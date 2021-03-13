@@ -1,3 +1,5 @@
+package com.leetcode;
+
 /**
  * 序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如 #。
  * <p>
@@ -35,24 +37,21 @@
  */
 public class LeetCode331 {
     public static boolean isValidSerialization(String preorder) {
-        int n = preorder.length();
-        int i = 0;
+        int len = preorder.length();
         int slots = 1;
-        while (i < n) {
-            if (slots == 0) {
-                return false;
-            }
+        int i = 0;
+        while (i < len) {
+            if (slots == 0) return false;
             if (preorder.charAt(i) == ',') {
                 i++;
             } else if (preorder.charAt(i) == '#') {
-                slots--;
+                slots -= 1;
                 i++;
             } else {
-                // 读一个数字
-                while (i < n && preorder.charAt(i) != ',') {
+                while (i < len && preorder.charAt(i) != ',') {
                     i++;
                 }
-                slots++; // slots = slots - 1 + 2
+                slots += 1;
             }
         }
         return slots == 0;
