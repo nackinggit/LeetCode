@@ -36,7 +36,7 @@ public class LeetCode55 {
         for (int i = 0; i < nums.length; i++) {
             if (i <= rightMost) {
                 rightMost = Math.max(i + nums[i], rightMost);
-                if (rightMost >= nums.length) {
+                if (rightMost >= nums.length - 1) {
                     return true;
                 }
             } else {
