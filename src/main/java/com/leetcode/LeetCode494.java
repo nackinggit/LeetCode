@@ -47,7 +47,7 @@ public class LeetCode494 {
             return 0;
         }
 
-        int len = nums.length, neg = diff / 2;
+        int neg = diff / 2;
 
         int[] dp = new int[neg + 1];
         dp[0] = 1;
