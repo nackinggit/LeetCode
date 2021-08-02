@@ -40,24 +40,21 @@ import java.util.Arrays;
  */
 public class LeetCode743 {
     public int networkDelayTime(int[][] times, int n, int k) {
-        final int INF = Integer.MIN_VALUE / 2;
+        final int INF = Integer.MAX_VALUE / 2;
         int[][] g = new int[n][n];
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; ++i) {
             Arrays.fill(g[i], INF);
         }
-
-        for (int[] time : times) {
-            int x = time[0] - 1;
-            int y = time[1] - 1;
-            g[x][y] = time[2];
+        for (int[] t : times) {
+            int x = t[0] - 1, y = t[1] - 1;
+            g[x][y] = t[2];
         }
 
         int[] dist = new int[n];
         Arrays.fill(dist, INF);
         dist[k - 1] = 0;
         boolean[] used = new boolean[n];
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; ++i) {
             int x = -1;
             for (int y = 0; y < n; ++y) {
                 if (!used[y] && (x == -1 || dist[y] < dist[x])) {
@@ -65,7 +62,6 @@ public class LeetCode743 {
                 }
             }
             used[x] = true;
-
             for (int y = 0; y < n; ++y) {
                 dist[y] = Math.min(dist[y], dist[x] + g[x][y]);
             }
