@@ -21,7 +21,7 @@ package com.leetcode;
  */
 public class LeetCode600 {
     public int findIntegers(int n) {
-        int[] dp = new int[31];
+        int[] dp = new int[31]; //dp[t] 表示高度为 t+1、根结点为 0 的满二叉树中，不包含连续 1 的从根结点到叶结点的路径数量。
         dp[0] = dp[1] = 1;
         for (int i = 2; i < 31; ++i) {
             dp[i] = dp[i - 1] + dp[i - 2];
@@ -50,6 +50,6 @@ public class LeetCode600 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LeetCode600().findIntegers(9));
+        System.out.println(new LeetCode600().findIntegers(5));
     }
 }
