@@ -74,6 +74,8 @@ public class LeetCode437 {
     }
 
     public static void main(String[] args) {
-
+        TreeNode root = TreeNode.buildByArray(new int[]{1, 2, 3, 4, 5, 6});
+        System.out.println(new LeetCode437().pathSum(root, 5));
+        System.out.println(new LeetCode437().pathSum2(root, 5));
     }
 }
