@@ -1,7 +1,5 @@
 package com.leetcode;
 
-import javafx.util.Pair;
-
 import java.util.*;
 
 /**
@@ -62,8 +60,8 @@ public class LeetCode934 {
                 return node.depth - 1;
             }
 
-            for (Pair<Integer, Integer> pair : neighbors(new Pair<>(node.r, node.c), rows, cols)) {
-                int x = pair.getKey(), y = pair.getValue();
+            for (int[] pair : neighbors(new int[]{node.r, node.c}, rows, cols)) {
+                int x = pair[0], y = pair[1];
                 if (colors[x][y] != 1) {
                     queue.add(new Node(x, y, node.depth + 1));
                     colors[x][y] = 1;
@@ -82,17 +80,17 @@ public class LeetCode934 {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 if (colors[r][c] == 0 && grid[r][c] == 1) {
-                    Stack<Pair<Integer, Integer>> stack = new Stack<>();
-                    stack.push(new Pair<>(r, c));
+                    Stack<int[]> stack = new Stack<>();
+                    stack.push(new int[]{r, c});
                     colors[r][c] = ++t;
 
                     while (!stack.isEmpty()) {
-                        Pair<Integer, Integer> pair = stack.pop();
-                        for (Pair<Integer, Integer> neighbor : neighbors(pair, rows, cols)) {
-                            int nr = neighbor.getKey(), nc = neighbor.getValue();
+                        int[] pair = stack.pop();
+                        for (int[] neighbor : neighbors(pair, rows, cols)) {
+                            int nr = neighbor[0], nc = neighbor[1];
                             if (grid[nr][nc] == 1 && colors[nr][nc] == 0) {
                                 colors[nr][nc] = t;
-                                stack.push(new Pair<>(nr, nc));
+                                stack.push(new int[]{nr, nc});
                             }
                         }
                     }
@@ -103,13 +101,13 @@ public class LeetCode934 {
         return colors;
     }
 
-    private List<Pair<Integer, Integer>> neighbors(Pair<Integer, Integer> pair, int rows, int cols) {
-        int r = pair.getKey(), c = pair.getValue();
-        List<Pair<Integer, Integer>> res = new ArrayList<>();
-        if (r - 1 >= 0) res.add(new Pair<>(r - 1, c));
-        if (c - 1 >= 0) res.add(new Pair<>(r, c - 1));
-        if (r + 1 < rows) res.add(new Pair<>(r + 1, c));
-        if (c + 1 < cols) res.add(new Pair<>(r, c + 1));
+    private List<int[]> neighbors(int[] pair, int rows, int cols) {
+        int r = pair[0], c = pair[1];
+        List<int[]> res = new ArrayList<>();
+        if (r - 1 >= 0) res.add(new int[]{r - 1, c});
+        if (c - 1 >= 0) res.add(new int[]{r, c - 1});
+        if (r + 1 < rows) res.add(new int[]{r + 1, c});
+        if (c + 1 < cols) res.add(new int[]{r, c + 1});
         return res;
     }
 

@@ -1,6 +1,5 @@
 package com.leetcode;
 
-import java.util.Arrays;
 
 public class LeetCode74 {
     public boolean searchMatrix(int[][] matrix, int target) {
