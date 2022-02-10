@@ -1,6 +1,9 @@
 package com;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TreeNode {
     public int val;
@@ -9,6 +12,25 @@ public class TreeNode {
 
     public TreeNode(int x) {
         val = x;
+    }
+
+    @Override
+    public String toString() {
+        List<String> preOrder = preOrderList();
+        return preOrder.toString();
+    }
+
+    private List<String> preOrderList() {
+        List<TreeNode> pre = new ArrayList<>();
+        preOrder(this, pre);
+        return pre.isEmpty() ? null : pre.stream().map(o -> o.val + "").collect(Collectors.toList());
+    }
+
+    private void preOrder(TreeNode root, List<TreeNode> res) {
+        if (root == null) return;
+        res.add(root);
+        preOrder(root.left, res);
+        preOrder(root.right, res);
     }
 
     public static TreeNode buildByArray(int[] vals) {
