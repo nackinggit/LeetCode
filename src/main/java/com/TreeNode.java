@@ -1,8 +1,6 @@
 package com;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TreeNode {
@@ -31,6 +29,25 @@ public class TreeNode {
         res.add(root);
         preOrder(root.left, res);
         preOrder(root.right, res);
+    }
+
+    private List<Integer> preorder(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.push(root);
+        while (!deque.isEmpty()) {
+            TreeNode node = deque.pop();
+            res.add(node.val);
+            if (node.right != null) {
+                deque.push(node.right);
+            }
+            if (node.left != null) {
+                deque.push(node.left);
+                deque.pollFirst();
+            }
+        }
+        return res;
     }
 
     public static TreeNode buildByArray(int[] vals) {
