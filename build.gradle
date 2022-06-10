@@ -10,5 +10,9 @@ repositories {
 }
 
 dependencies {
-    
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding("utf-8")
 }
