@@ -23,6 +23,9 @@ package com.leetcode;
  */
 public class LeetCode96 {
     public int numTrees(int n) {
+        //G[i] 代表长度为i的总二叉搜索树数量
+        //G[i] = 根节点为1~i的二叉搜索树总和
+        //根节点为j,长度为i的二叉搜索树总数 = 左边(0~j-1)*右边(j+1~i)的数量
         int[] G = new int[n + 1];
         G[0] = 1;
         G[1] = 1;

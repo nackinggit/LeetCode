@@ -34,52 +34,28 @@ import com.ListNode;
  */
 public class LeetCode148 {
     public ListNode sortList(ListNode head) {
-        return sortList(head, null);
-    }
+        if (head == null || head.next == null) return head;
 
-    public ListNode sortList(ListNode head, ListNode tail) {
-        if (head == null) return null;
-        if (head.next == tail) {
-            head.next = null;
-            return head;
-        }
-
-        ListNode slow = head, fast = head;
-        while (fast != tail) {
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
             slow = slow.next;
-            fast = fast.next;
-            if (fast != tail) {
-                fast = fast.next;
-            }
+            fast = fast.next.next;
         }
-
-        ListNode mid = slow;
-        ListNode list1 = sortList(slow, mid);
-        ListNode list2 = sortList(mid, tail);
-        return merge(list1, list2);
+        ListNode head2 = slow.next;
+        slow.next = null;
+        return merge(sortList(head), sortList(head2));
     }
 
     private ListNode merge(ListNode list1, ListNode list2) {
-        ListNode tmpHead = new ListNode();
-        ListNode tmp = tmpHead, tmp1 = list1, tmp2 = list2;
-
-        while (tmp1 != null && tmp2 != null) {
-            if (tmp1.val <= tmp2.val) {
-                tmp.next = tmp1;
-                tmp1 = tmp1.next;
-            } else {
-                tmp.next = tmp2;
-                tmp2 = tmp2.next;
-            }
-            tmp = tmp.next;
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+        ListNode head = list1.val >= list2.val ? list2 : list1;
+        if (head == list2) {
+            head.next = merge(list1, list2.next);
+        } else {
+            head.next = merge(list1.next, list2);
         }
-
-        if (tmp1 != null) {
-            tmp.next = tmp1;
-        } else if (tmp2 != null) {
-            tmp.next = tmp2;
-        }
-
-        return tmpHead.next;
+        return head;
     }
 }

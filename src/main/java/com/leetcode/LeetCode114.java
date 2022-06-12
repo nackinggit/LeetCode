@@ -2,6 +2,11 @@ package com.leetcode;
 
 import com.TreeNode;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+
 /**
  * 114. 二叉树展开为链表
  * 给你二叉树的根结点 root ，请你将它展开为一个单链表：
@@ -28,7 +33,7 @@ public class LeetCode114 {
     public void flatten(TreeNode root) {
         TreeNode cur = root;
         while (cur != null) {
-            if(cur.left != null) {
+            if (cur.left != null) {
                 TreeNode next = cur.left;
                 TreeNode parent = next;
                 while (parent.right != null) {
@@ -40,5 +45,35 @@ public class LeetCode114 {
             }
             cur = cur.right;
         }
+    }
+
+    public static List<TreeNode> preorder(TreeNode root) {
+        List<TreeNode> res = new ArrayList<>();
+        if (root == null) return res;
+
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            res.add(node);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        System.out.println(preorder(root));
     }
 }
