@@ -34,28 +34,62 @@ import java.util.*;
  * prerequisites[i] 中的所有课程对 互不相同
  */
 public class LeetCode207 {
+
+    public static boolean canFinish2(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> edges = new ArrayList<>();
+        int[] inDegrees = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            edges.add(new ArrayList<>());
+        }
+
+        for (int[] pre : prerequisites) {
+            edges.get(pre[1]).add(pre[0]);
+            inDegrees[pre[0]] += 1;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegrees[i] == 0) {
+                queue.offer(i);
+            }
+        }
+        int visited = 0;
+
+        while (!queue.isEmpty()) {
+            visited += 1;
+            int i = queue.poll();
+            for (int out : edges.get(i)) {
+                inDegrees[out] -= 1;
+                if (inDegrees[out] == 0) {
+                    queue.offer(out);
+                }
+            }
+        }
+        return visited == numCourses;
+    }
+
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, Set<Integer>> requires = new HashMap<>();
-        for(int[] pre : prerequisites) {
+        for (int[] pre : prerequisites) {
             Set<Integer> set = requires.getOrDefault(pre[0], new HashSet<>());
             set.add(pre[1]);
             requires.put(pre[0], set);
         }
 
         Deque<Integer> deque = new ArrayDeque<>();
-        for(int i = 0; i < numCourses; i++) {
-            if(!requires.containsKey(i)) {
+        for (int i = 0; i < numCourses; i++) {
+            if (!requires.containsKey(i)) {
                 deque.add(i);
             }
         }
 
-        while(!deque.isEmpty()) {
+        while (!deque.isEmpty()) {
             int i = deque.poll();
-            for(int k : requires.keySet()) {
+            for (int k : requires.keySet()) {
                 Set<Integer> set = requires.get(k);
-                if(set != null && !set.isEmpty()) {
+                if (set != null && !set.isEmpty()) {
                     set.remove(i);
-                    if(set.isEmpty()) {
+                    if (set.isEmpty()) {
                         deque.add(k);
                     }
                 }
@@ -63,7 +97,7 @@ public class LeetCode207 {
         }
 
         for (Set<Integer> set : requires.values()) {
-            if(!set.isEmpty()) {
+            if (!set.isEmpty()) {
                 return false;
             }
         }

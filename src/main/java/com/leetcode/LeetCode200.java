@@ -50,13 +50,15 @@ public class LeetCode200 {
 
         int rows = grid.length;
         int cols = grid[0].length;
+        boolean[][] visited = new boolean[rows][cols];
         int res = 0;
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (grid[i][j] == '1') {
+                if (grid[i][j] == '1' && !visited[i][j]) {
                     res += 1;
-                    grid[i][j] = 0;
+                    visited[i][j] = true;
+//                    grid[i][j] = 0;
                     Queue<int[]> neighbors = new LinkedList<>();
                     neighbors.add(new int[]{i, j});
                     while (!neighbors.isEmpty()) {
@@ -66,8 +68,10 @@ public class LeetCode200 {
                             int ny = xy[1] + dir[1];
                             if ((nx >= 0 && nx < rows)
                                     && (ny >= 0 && ny < cols)
-                                    && grid[nx][ny] == '1') {
-                                grid[nx][ny] = '0';
+                                    && grid[nx][ny] == '1'
+                                    && !visited[nx][ny]) {
+//                                grid[nx][ny] = '0';
+                                visited[nx][ny] = true;
                                 neighbors.add(new int[]{nx, ny});
                             }
                         }

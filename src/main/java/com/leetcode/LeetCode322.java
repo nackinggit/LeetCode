@@ -36,6 +36,8 @@ import java.util.Arrays;
 public class LeetCode322 {
     public static int coinChange(int[] coins, int amount) {
         if (amount < 1) return 0;
+        //dp[i] 代表组成i的硬币组合
+        //dp[i] = min(dp[i-coins[j]] + 1) i >= coins[j]
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
         dp[0] = 0;
