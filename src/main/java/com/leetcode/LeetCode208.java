@@ -86,7 +86,7 @@ public class LeetCode208 {
                     tmpRoot.isLast = true;
                 }
                 cur.put(c, tmpRoot);
-                cur = tmpRoot.next;
+                cur = tmpRoot.children;
             }
             System.out.format("insert(%s) done\n", word);
         }
@@ -107,7 +107,7 @@ public class LeetCode208 {
                     System.out.format("search(%s) = false\n", word);
                     return false;
                 } else {
-                    cur = node.next;
+                    cur = node.children;
                 }
             }
             System.out.format("search(%s) = false\n", word);
@@ -126,7 +126,7 @@ public class LeetCode208 {
                     System.out.format("startsWith(%s) = false\n", prefix);
                     return false;
                 } else {
-                    cur = node.next;
+                    cur = node.children;
                 }
             }
             System.out.format("startsWith(%s) = true\n", prefix);
@@ -138,7 +138,7 @@ public class LeetCode208 {
         char value;
         int count;
         boolean isLast;
-        Map<Character, TrieNode> next = new HashMap<>();
+        Map<Character, TrieNode> children = new HashMap<>();
     }
 
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
