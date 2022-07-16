@@ -7,9 +7,13 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/public/' }
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.1'
+    implementation 'io.netty:netty-all:4.1.78.Final'
 
 }
 

@@ -38,7 +38,7 @@ public class LeetCode75 {
             if (nums[i] == 0) {
                 swap(nums, p0, i);
                 if (p0 < p1) {
-                    swap(nums, p1, i);
+                    swap(nums, p1, i); //如果p0小于p1，说明p1-1放的是1
                 }
                 p0++;
                 p1++;

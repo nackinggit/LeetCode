@@ -1,7 +1,9 @@
 package com.cxymsjd;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import org.apache.tomcat.util.collections.SynchronizedQueue;
+import org.springframework.boot.SpringApplication;
+
+import java.util.*;
 
 /**
  * 给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。
@@ -21,6 +23,8 @@ import java.util.LinkedList;
  */
 public class C17_21 {
     public int trap(int[] height) {
+        SpringApplication.run(C17_21.class);
+        Map map = Collections.synchronizedMap(new HashMap<>());
         int ans = 0;
         Deque<Integer> stack = new LinkedList<>();
         for (int i = 0; i < height.length; i++) {
@@ -39,5 +43,29 @@ public class C17_21 {
         }
 
         return ans;
+    }
+
+    static int max = 0;
+
+    public static int nearestNum(int[] nums, int target) {
+        if (nums == null || nums.length == 0 || target == 0) return 0;
+        Arrays.sort(nums);
+        dfs(nums, target, 0);
+        return max;
+    }
+
+    private static void dfs(int[] nums, int target, int cur) {
+        if (cur > target) return;
+        max = Math.max(max, cur);
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int n = cur * 10 + nums[i];
+            if ((n + "").compareTo(target + "") > 0) continue;
+            dfs(nums, target, n);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 4, 5, 9};
+        System.out.println(nearestNum(nums, 32999));
     }
 }
