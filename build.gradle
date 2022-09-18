@@ -5,6 +5,7 @@ plugins {
 group 'pnj.study'
 version '1.0-SNAPSHOT'
 
+
 repositories {
     mavenCentral()
     maven { url 'https://maven.aliyun.com/repository/public/' }
