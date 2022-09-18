@@ -15,6 +15,7 @@ public class TreeNode {
     @Override
     public String toString() {
         List<String> preOrder = preOrderList();
+        assert preOrder != null;
         return preOrder.toString();
     }
 
